@@ -1,8 +1,8 @@
 <?php
 function factorialOfNumber($n)
 {
-  $value  = $n;
-  for($x = $n, $x <= 1; --$x;){
+  $value  = 1;
+  for($x = $n; $x >= 1; $x--){
     $value *=$x;
   }
   return $value;

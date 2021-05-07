@@ -3,28 +3,24 @@ class Stack {
     //@var array stack element 
     private $elements;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->elements = array();
     }
 
     //insert @param string num
-    public function push($ele)
-    {
+    public function push($ele){
         $this->elements[] = $ele;
     }
 
     //delete top
-    public function pop()
-    {
+    public function pop(){
         if (!$this->isEmpty()) {
-            unset($this->elements[sizeof($this->elements) - 1]); 
+            array_pop($this->elements);  
         }
     }
 
     //get top
-    public function top()
-    {
+    public function top(){
         if (!$this->isEmpty()){
             return $this->elements[sizeof($this->elements) - 1];
         }
@@ -53,7 +49,6 @@ function removeCoupleOfWords($words){
         } else {
             //今のスタックのtopの値を取得
             $str = $stack->top();
-            
             //入れようとしている値とtopの値が同じならpop削除
             if ($words[$i] == $str) {
                 $stack->pop();
@@ -67,4 +62,7 @@ function removeCoupleOfWords($words){
 }
 
 $words = ["ab", "aa", "aa", "bcd", "ab"];
+echo removeCoupleOfWords($words) . "<br>";
+
+$words = ["hello" , "world" , "world" , "hello"];
 echo removeCoupleOfWords($words);

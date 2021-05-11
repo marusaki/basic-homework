@@ -1,43 +1,47 @@
 <?php
-
-function Calc($arr){
-    Average($arr);
-    Total($arr);
-    Minimum($arr);
-    Maximum($arr);
-    echo "<br>";
-
+ 
+function MaxHeapify(&$data, $heapSize, $index) {
+   $left = ($index + 1) * 2 - 1;
+   $right = ($index + 1) * 2;
+   $largest = 0;
+ 
+   if ($left < $heapSize && $data[$left] > $data[$index])
+      $largest = $left;
+   else
+      $largest = $index;
+ 
+   if ($right < $heapSize && $data[$right] > $data[$largest])
+      $largest = $right;
+ 
+   if ($largest != $index)
+   {
+      $temp = $data[$index];
+      $data[$index] = $data[$largest];
+      $data[$largest] = $temp;
+ 
+      MaxHeapify($data, $heapSize, $largest);
+   }
 }
-
-function Average($arr){
-    $ave = 0;
-    for($i = 0 ;$i < sizeof(($arr)); $i++){
-        $ave += $arr[$i];
-    }
-    echo $ave / sizeof($arr) . "\n";
+ 
+function HeapSort(&$data, $count) {
+   $heapSize = $count;
+ 
+   for ($p = ($heapSize - 1) / 2; $p >= 0; $p--)
+      MaxHeapify($data, $heapSize, $p);
+ 
+   for ($i = $count - 1; $i > 0; $i--)
+   {
+      $temp = $data[$i];
+      $data[$i] = $data[0];
+      $data[0] = $temp;
+ 
+      $heapSize--;
+      MaxHeapify($data, $heapSize, 0);
+   }
 }
-
-function Total($arr){
-    $sum = 0;
-    for($i = 0 ;$i < sizeof(($arr)); $i++){
-        $sum += $arr[$i];
-    }
-    echo $sum . "\n";
-}
-
-function Minimum($arr){
-    echo min($arr) . "\n";
-}
-
-function Maximum($arr){
-    echo max($arr) . "\n";
-}
-
-$arr = array(5,12,17,9,3);
-Calc($arr);
-$arr = array(13,4,8,14,1);
-Calc($arr);
-$arr = array(9,5,3,7,21);
-Calc($arr);
-
+ 
+$array = array(20,43,65,88,11,33,56,74);
+HeapSort($array,8);
+print_r($array);
+ 
 ?>

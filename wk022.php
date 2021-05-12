@@ -51,6 +51,13 @@
             return empty($this->elements);
         }
     }
+    
+$stack = new Stack();
+$stack->push("6");
+$stack->push("2");
+$stack->push("7");
+$stack->push("1");
+//print_r($stack->elements);
 
 
 ?>

@@ -53,7 +53,13 @@ class node
 //Binary Tree Class
 class BT
 {
+    /** @var Node */ 
     private $root;
+
+    public function __construct($root)
+    {
+        $this->root = $root;   
+    }
 
     //get root
     public function getRoot()
@@ -68,6 +74,7 @@ class BT
     }
 }
 
+/*
 function insertNum($arr, $num)
 {
     $tmpi = 0;
@@ -85,6 +92,29 @@ function insertNum($arr, $num)
         }
     }
 }
+*/
+
+function insertNum($bt, $num)
+{
+    if ($bt->getRoot() == null) {
+        $bt->setRoot($num);
+    } else {
+        $current = $bt->getRoot();
+        while (true){
+            if ($current->getLeft()->getData() === null){
+                $newnode = new Node($num, null, null);
+                $bt->setLeft($newnode);
+                echo $num ." new node " . $bt->getData() . " Left add";
+                break;
+            } elseif ($current->getRight()->getData() === null){
+                $newnode = new Node($num, null, null);
+                $bt->setRight($newnode);
+                echo $num ." new node " . $bt->getData() . " Right add";
+                break;
+            }
+        }
+    }
+}
 
 $left1 = new Node(7);
 $left2 = new Node(15);
@@ -96,9 +126,9 @@ $parent2 = new node(9, $left2, $left3);
 $root = new Node(10, $parent1, $parent2);
 
 $bt = new BT($root);
-
 //配列にrootから順にノード情報をもつ
-$arr = array($root, $parent1, $parent2, $left1, $left2, $left3);
-insertNum($arr, 12);
+//$arr = array($root, $parent1, $parent2, $left1, $left2, $left3);
+//insertNum($arr, 12);
+insertNum($bt, 12);
 
 ?>

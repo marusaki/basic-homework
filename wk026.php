@@ -1,6 +1,6 @@
 <?php
  
-function MaxHeapify(&$data, $heapSize, $index) {
+function MaxHeapify(&$data, $heapSize, int $index) {
    $left = ($index + 1) * 2 - 1;
    $right = ($index + 1) * 2;
    $largest = 0;

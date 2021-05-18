@@ -1,5 +1,8 @@
 <?php
 // A node of Binary Tree
+
+use Queue as GlobalQueue;
+
 class node
 {
     private $data;
@@ -94,23 +97,83 @@ function insertNum($arr, $num)
 }
 */
 
-function insertNum($bt, $num)
+class Queue {
+    /** @var array queue element */
+    private $elements;
+
+    public function __construct()
+    {
+        $this->elements = array(); //initialize queue element
+    }
+
+    /**
+    * insert an element
+    * @param string $ele
+    * @return void
+    */
+    public function enqueue($ele)
+    {
+        array_unshift($this->elements, $ele); 
+    }
+
+    /**
+    * delete front element
+    * @return void
+    */
+    public function dequeue()
+    {
+        if (!$this->isEmpty()) { //check if queue is not empty
+            unset($this->elements[sizeof($this->elements) - 1]); // same to pop function in stack
+        }
+    }
+
+    /**
+    * get front element
+    * @return string
+    */
+    public function front()
+    {
+            if (!$this->isEmpty()) {
+            return $this->elements[sizeof($this->elements) - 1]; // same to top function in stack
+        }
+
+        return null;
+    }
+
+    /**
+    * check queue is empty or not
+    * @return boolean
+    */
+    public function isEmpty()
+    {
+        return empty($this->elements);
+    }
+}
+
+function insertNum(&$bt, $num)
 {
     if ($bt->getRoot() == null) {
         $bt->setRoot($num);
     } else {
-        $current = $bt->getRoot();
+        $queue = new Queue();
+        $queue->enqueue($bt->getRoot());
+
         while (true){
-            if ($current->getLeft()->getData() === null){
+            $current = $queue->front();
+            if ($current->getLeft() == null){
                 $newnode = new Node($num, null, null);
-                $bt->setLeft($newnode);
-                echo $num ." new node " . $bt->getData() . " Left add";
+                $current->setLeft($newnode);
+                echo $num ." new node " . $current->getData() . " Left add<br>";
                 break;
-            } elseif ($current->getRight()->getData() === null){
+            } elseif ($current->getRight() == null){
                 $newnode = new Node($num, null, null);
-                $bt->setRight($newnode);
-                echo $num ." new node " . $bt->getData() . " Right add";
+                $current->setRight($newnode);
+                echo $num ." new node " . $current->getData() . " Right add<br>";
                 break;
+            } else {
+                $queue->enqueue($current->getLeft());
+                $queue->enqueue($current->getRight());
+                $queue->dequeue();
             }
         }
     }
@@ -130,5 +193,11 @@ $bt = new BT($root);
 //$arr = array($root, $parent1, $parent2, $left1, $left2, $left3);
 //insertNum($arr, 12);
 insertNum($bt, 12);
+insertNum($bt, 99);
+insertNum($bt, 100);
+insertNum($bt, 101);
+insertNum($bt, 102);
+insertNum($bt, 103);
+insertNum($bt, 104);
 
 ?>

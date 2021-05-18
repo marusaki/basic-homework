@@ -75,6 +75,11 @@ class BT
     {
         $this->root = $root;
     }
+    
+    public function showNode()
+    {
+        print_r($this->root);
+    }
 }
 
 /*
@@ -136,7 +141,6 @@ class Queue {
             if (!$this->isEmpty()) {
             return $this->elements[sizeof($this->elements) - 1]; // same to top function in stack
         }
-
         return null;
     }
 
@@ -193,11 +197,13 @@ $bt = new BT($root);
 //$arr = array($root, $parent1, $parent2, $left1, $left2, $left3);
 //insertNum($arr, 12);
 insertNum($bt, 12);
-insertNum($bt, 99);
-insertNum($bt, 100);
-insertNum($bt, 101);
-insertNum($bt, 102);
-insertNum($bt, 103);
-insertNum($bt, 104);
+$bt->showNode();
+
+// insertNum($bt, 99);
+// insertNum($bt, 100);
+// insertNum($bt, 101);
+// insertNum($bt, 102);
+// insertNum($bt, 103);
+// insertNum($bt, 104);
 
 ?>
